@@ -70,7 +70,7 @@ stages:
       - gh:vanilla-os/desktop-image:main:modules/210-libs-extra.yml
       - gh:vanilla-os/desktop-image:main:modules/300-hide-image-magick.yml
       - gh:vanilla-os/desktop-image:main:modules/997-ensure-exec-hooks.yml
-      - gh:vanilla-os/desktop-image:main:modules/998-vanilla-cleanup.yml
+      - modules/998-vanilla-cleanup.yml
       - gh:vanilla-os/desktop-image:main:modules/999-pkg-cleanup.yml
       - gh:vanilla-os/desktop-image:main:modules/999-clear-first-setup-steps-unit.yml
 
