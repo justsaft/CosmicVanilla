@@ -1,5 +1,5 @@
-name: Vanilla Desktop
-id: desktop
+name: Cosmic Vanilla
+id: cosmicvanilla
 
 stages:
 - id: build
