@@ -69,6 +69,7 @@ stages:
       - gh:vanilla-os/desktop-image:main:modules/200-gnome-common.yml
       - gh:vanilla-os/desktop-image:main:modules/210-libs-extra.yml
       - gh:vanilla-os/desktop-image:main:modules/300-hide-image-magick.yml
+      - modules/900-nvidia-drivers.yml
       - gh:vanilla-os/desktop-image:main:modules/997-ensure-exec-hooks.yml
       - modules/998-vanilla-cleanup.yml
       - gh:vanilla-os/desktop-image:main:modules/999-pkg-cleanup.yml
