@@ -1,9 +1,9 @@
 # Source: https://github.com/Vanilla-OS/nvidia-exp-image/blob/main/recipe.yml
 
-name: nvidia-drivers
+name: nvidia-official-driver
 type: shell
 commands:
-  - echo abc
+- apt-mark hold nvidia-kernel-open nvidia-driver nvidia-vaapi-driver nvidia-settings nvidia-persistenced nvidia-smi cuda-drivers libnvidia-cfg1 libnvidia-glcore libnvidia-glvkspirv libnvidia-gpucomp libnvidia-fbc1 nvidia-container-toolkit
 modules:
   - name: nvidia-official-repo
     type: shell
@@ -11,48 +11,40 @@ modules:
     - curl -fSsL https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/3bf863cc.pub | gpg --dearmor -o /usr/share/keyrings/nvidia-drivers.gpg
     - echo 'deb [signed-by=/usr/share/keyrings/nvidia-drivers.gpg] https://developer.download.nvidia.com/compute/cuda/repos/debian12/x86_64/ /' > /etc/apt/sources.list.d/nvidia-drivers.list
     - apt-get update
-
-  - name: nvidia-official-driver
+  - name: install-nvidia
+    type: apt
+    source:
+      packages:
+      - nvidia-kernel-open
+      - nvidia-driver
+      - nvidia-vaapi-driver
+      - nvidia-settings
+      - nvidia-persistenced
+      - nvidia-smi
+      - cuda-drivers
+      - libnvidia-cfg1
+      - libnvidia-glcore
+      - libnvidia-glvkspirv
+      - libnvidia-gpucomp
+      - libnvidia-fbc1
+      - nvidia-container-toolkit
+  - name: nvidia-sysd-units
     type: shell
     commands:
-    - apt-mark hold nvidia-kernel-open nvidia-driver nvidia-vaapi-driver nvidia-settings nvidia-persistenced nvidia-smi cuda-drivers libnvidia-cfg1 libnvidia-glcore libnvidia-glvkspirv libnvidia-gpucomp libnvidia-fbc1 nvidia-container-toolkit
-    modules:
-      - name: install-nvidia
-        type: apt
-        source:
-          packages:
-          - nvidia-kernel-open
-          - nvidia-driver
-          - nvidia-vaapi-driver
-          - nvidia-settings
-          - nvidia-persistenced
-          - nvidia-smi
-          - cuda-drivers
-          - libnvidia-cfg1
-          - libnvidia-glcore
-          - libnvidia-glvkspirv
-          - libnvidia-gpucomp
-          - libnvidia-fbc1
-          - nvidia-container-toolkit
-
-      - name: nvidia-sysd-units
-        type: shell
-        commands:
-        - mkdir -p /etc/systemd/system/systemd-suspend.service.wants
-        - mkdir -p /etc/systemd/system/systemd-hibernate.service.wants
-        - ln -s /usr/lib/systemd/system/nvidia-suspend.service /etc/systemd/system/systemd-suspend.service.wants/nvidia-suspend.service
-        - ln -s /usr/lib/systemd/system/nvidia-hibernate.service /etc/systemd/system/systemd-hibernate.service.wants/nvidia-hibernate.service
-        - ln -s /usr/lib/systemd/system/nvidia-resume.service /etc/systemd/system/systemd-hibernate.service.wants/nvidia-resume.service
-
-      - name: vanilla-gpu-tools
-        type: shell
-        source:
-          type: tar
-          url: https://github.com/Vanilla-OS/vanilla-tools/releases/download/v1.0.0/vanilla-tools.tar.gz
-          checksum: 0e1d92d9c9154f9a115e97b40ff692afa52ddd0d9f770a8ec67440bf1a48aa72
-        commands:
-        - mkdir -p /usr/bin
-        - cp /sources/vanilla-tools/vanilla-tools/vanilla-tools/nrun /usr/bin/nrun
-        - cp /sources/vanilla-tools/vanilla-tools/vanilla-tools/prime-switch /usr/bin/prime-switch
-        - chmod +x /usr/bin/nrun
-        - chmod +x /usr/bin/prime-switch
+    - mkdir -p /etc/systemd/system/systemd-suspend.service.wants
+    - mkdir -p /etc/systemd/system/systemd-hibernate.service.wants
+    - ln -s /usr/lib/systemd/system/nvidia-suspend.service /etc/systemd/system/systemd-suspend.service.wants/nvidia-suspend.service
+    - ln -s /usr/lib/systemd/system/nvidia-hibernate.service /etc/systemd/system/systemd-hibernate.service.wants/nvidia-hibernate.service
+    - ln -s /usr/lib/systemd/system/nvidia-resume.service /etc/systemd/system/systemd-hibernate.service.wants/nvidia-resume.service
+  - name: vanilla-gpu-tools
+    type: shell
+    source:
+      type: tar
+      url: https://github.com/Vanilla-OS/vanilla-tools/releases/download/v1.0.0/vanilla-tools.tar.gz
+      checksum: 0e1d92d9c9154f9a115e97b40ff692afa52ddd0d9f770a8ec67440bf1a48aa72
+    commands:
+    - mkdir -p /usr/bin
+    - cp /sources/vanilla-tools/vanilla-tools/vanilla-tools/nrun /usr/bin/nrun
+    - cp /sources/vanilla-tools/vanilla-tools/vanilla-tools/prime-switch /usr/bin/prime-switch
+    - chmod +x /usr/bin/nrun
+    - chmod +x /usr/bin/prime-switch
