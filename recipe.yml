@@ -55,7 +55,7 @@ stages:
       - gh:vanilla-os/desktop-image:main:modules/35-nautilus-terminal-rightclick.yml
       - gh:vanilla-os/desktop-image:main:modules/50-laptop-goodies.yml
       - gh:vanilla-os/nvidia-exp-image:dev:modules/50-nvidia-driver-install.yml
-      - gh:vanilla-os/nvidia-exp-image:dev:modules/50-nvidia-systemd-units.yml
+      - gh:vanilla-os/nvidia-exp-image:dev:modules/51-nvidia-systemd-units.yml
       - gh:vanilla-os/desktop-image:main:modules/60-media.yml
       - gh:vanilla-os/desktop-image:main:modules/80-printers.yml
       - gh:vanilla-os/desktop-image:main:modules/90-3d-utils.yml
