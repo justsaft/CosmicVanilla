@@ -54,6 +54,8 @@ stages:
       - gh:vanilla-os/desktop-image:main:modules/10-vanilla-abroot-rollback-notifier.yml
       - gh:vanilla-os/desktop-image:main:modules/35-nautilus-terminal-rightclick.yml
       - gh:vanilla-os/desktop-image:main:modules/50-laptop-goodies.yml
+      - gh:vanilla-os/nvidia-exp-image:dev:modules/50-nvidia-driver-install.yml
+      - gh:vanilla-os/nvidia-exp-image:dev:modules/50-nvidia-systemd-units.yml
       - gh:vanilla-os/desktop-image:main:modules/60-media.yml
       - gh:vanilla-os/desktop-image:main:modules/80-printers.yml
       - gh:vanilla-os/desktop-image:main:modules/90-3d-utils.yml
@@ -73,9 +75,6 @@ stages:
       - modules/998-vanilla-cleanup.yml
       - gh:vanilla-os/desktop-image:main:modules/999-pkg-cleanup.yml
       - gh:vanilla-os/desktop-image:main:modules/999-clear-first-setup-steps-unit.yml
-
-
-      #- modules/900-nvidia-drivers.yml
 
   - name: blackbox-rescue
     type: shell
